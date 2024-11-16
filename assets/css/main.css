@@ -3444,28 +3444,33 @@ input, select, textarea {
 			}
 
 		@media screen and (max-width: 980px) {
-
+			
 			#intro {
-				padding: 4rem 4rem 2rem 4rem ;
-				min-height: 90vh;
+				padding: 0; 
+				height: 100vh; 
+				-moz-justify-content: center;
+				-webkit-justify-content: center;
+				-ms-justify-content: center;
+				justify-content: center;
 			}
-
-				#intro p br {
-					display: none;
-				}
-
-				#intro + #header {
-					margin-top: -14rem;
-				}
-
+			/* Other styles */
 		}
 
-		@media screen and (max-width: 736px) {
 
+		@media screen and (max-width: 736px) {
+			
 			#intro {
-				padding: 3rem 2rem 1rem 2rem ;
-				min-height: 80vh;
+				padding: 0; /* Remove padding */
+				height: 100vh; /* Ensure full viewport height */
+				/* Ensure justify-content is set to center */
+				-moz-justify-content: center;
+				-webkit-justify-content: center;
+				-ms-justify-content: center;
+				justify-content: center;
 			}
+			/* Other styles */
+		}
+
 
 				#intro h1 {
 					font-size: 3.25rem;
