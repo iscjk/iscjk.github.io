@@ -4694,7 +4694,7 @@ input, select, textarea {
 .timeline-dot {
     width: 12px;
     height: 12px;
-    background-color: #0047AB; /* Cobalt Blue */
+    background-color: #18bfef; 
     border-radius: 50%;
     position: absolute;
     left: 0; /* Align dot with the left */
@@ -4702,7 +4702,7 @@ input, select, textarea {
 }
 
 .timeline-content {
-    border-left: 2px solid #0047AB; /* Vertical line */
+    border-left: 2px solid #18bfef; /* Vertical line */
     padding-left: 15px; /* Space between line and text */
     margin-left: 12px; /* Align content after the dot */
 }
@@ -4728,4 +4728,17 @@ input, select, textarea {
 .timeline-content ul li {
     margin-bottom: 5px;
     color: #000000;
+}
+.fade-in {
+	opacity: 1;
+	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+	transform: translateY(0);
+}
+
+.fade-in.inactive {
+	opacity: 0;
+	transform: translateY(20px);
+}
+html {
+    scroll-behavior: smooth;
 }
