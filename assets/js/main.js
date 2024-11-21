@@ -31,84 +31,82 @@
 	 */
 	$.fn._parallax = function(intensity) {
 
-		var	$window = $(window),
-			$this = $(this);
+    var $window = $(window),
+        $this = $(this);
 
-		if (this.length == 0 || intensity === 0)
-			return $this;
+    if (this.length == 0 || intensity === 0)
+        return $this;
 
-		if (this.length > 1) {
+    if (this.length > 1) {
 
-			for (var i=0; i < this.length; i++)
-				$(this[i])._parallax(intensity);
+        for (var i = 0; i < this.length; i++)
+            $(this[i])._parallax(intensity);
 
-			return $this;
+        return $this;
 
-		}
+    }
 
-		if (!intensity)
-			intensity = 0.25;
+    if (!intensity)
+        intensity = 0.25;
 
-		$this.each(function() {
+    $this.each(function() {
 
-			var $t = $(this),
-				$bg = $('<div class="bg"></div>').appendTo($t),
-				on, off;
+        var $t = $(this),
+            $bg = $('<div class="bg"></div>').appendTo($t),
+            on, off;
 
-			on = function() {
+        on = function() {
 
-				$bg
-					.removeClass('fixed')
-					.css('transform', 'matrix(1,0,0,1,0,0)');
+            $bg
+                .removeClass('fixed')
+                .css('transform', 'matrix(1,0,0,1,0,0)');
 
-				$window
-					.on('scroll._parallax', function() {
+            $window
+                .on('scroll._parallax', function() {
 
-						var pos = parseInt($window.scrollTop()) - parseInt($t.position().top);
+                    var pos = parseInt($window.scrollTop()) - parseInt($t.position().top);
 
-						$bg.css('transform', 'matrix(1,0,0,1,0,' + (pos * intensity) + ')');
+                    $bg.css('transform', 'matrix(1,0,0,1,0,' + (pos * intensity) + ')');
 
-					});
+                });
 
-			};
+        };
 
-			off = function() {
+        off = function() {
 
-				$bg
-					.addClass('fixed')
-					.css('transform', 'none');
+            $bg
+                .addClass('fixed')
+                .css('transform', 'none');
 
-				$window
-					.off('scroll._parallax');
+            $window
+                .off('scroll._parallax');
 
-			};
+        };
 
-			// Disable parallax on devices with poor performance.
-			if (browser.name == 'ie'			// IE
-			||	browser.name == 'edge'			// Edge
-			||	window.devicePixelRatio > 1		// Retina/HiDPI
-			||	browser.mobile)					// Mobile devices
-				off();
+        // Disable parallax on devices with poor performance.
+        if (browser.name == 'ie'            // IE
+        ||  browser.name == 'edge'          // Edge
+        // ||  window.devicePixelRatio > 1     // Retina/HiDPI
+        ||  browser.mobile)                 // Mobile devices
+            off();
 
-			// Enable everywhere else.
-			else {
+        // Enable everywhere else.
+        else {
+            on(); // Always enable the parallax effect
+        }
 
-				breakpoints.on('>large', on);
-				breakpoints.on('<=large', off);
+    });
 
-			}
+    $window
+        .off('load._parallax resize._parallax')
+        .on('load._parallax resize._parallax', function() {
+            $window.trigger('scroll');
+        });
 
-		});
+    return $(this);
 
-		$window
-			.off('load._parallax resize._parallax')
-			.on('load._parallax resize._parallax', function() {
-				$window.trigger('scroll');
-			});
+};
 
-		return $(this);
-
-	};
 
 	// Play initial animations on page load.
 	$window.on('load', function() {
